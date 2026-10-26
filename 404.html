@@ -12,6 +12,24 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/fonts.css">
 <link rel="stylesheet" href="/assets/site.css">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '29403165902707959');
+fbq('track', 'PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="shopier.com/reelsklon/"]');if(!a)return;var mac=a.href.indexOf('51941822')>-1;fbq('track','InitiateCheckout',{content_name:mac?'ReelsKlon Mac':'ReelsKlon Windows',content_ids:[mac?'51941822':'51941775'],content_type:'product',value:800,currency:'TRY'});});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=29403165902707959&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <header class="nav"><div class="wrap nav-in">
