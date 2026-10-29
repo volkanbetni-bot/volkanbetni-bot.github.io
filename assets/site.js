@@ -112,4 +112,8 @@
     return true;
   }
   if (tick()) setInterval(tick, 1000);
+
+  // Reviews: show 6, expand to all.
+  var revMore = document.querySelector('[data-rev-more]');
+  if (revMore) revMore.addEventListener('click', function () { document.querySelector('[data-revs]').classList.add('open'); });
 })();
