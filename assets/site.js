@@ -89,4 +89,27 @@
     }, { threshold: 0.2 });
     targets.forEach(function (t) { io2.observe(t); });
   }
+
+  // Launch price countdown: real deadline 2026-11-05 23:59 (Europe/Istanbul, UTC+3).
+  var END = Date.parse('2026-11-05T23:59:59+03:00');
+  var cdBoxes = document.querySelectorAll('[data-cd]'), cdShort = document.querySelectorAll('[data-cd-short]');
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var ms = END - Date.now();
+    if (ms <= 0) {
+      cdBoxes.forEach(function (el) { el.hidden = true; });
+      cdShort.forEach(function (el) { el.hidden = true; });
+      return false;
+    }
+    var t = Math.floor(ms / 1000), d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
+    cdBoxes.forEach(function (el) {
+      el.querySelector('[data-cd-d]').textContent = d;
+      el.querySelector('[data-cd-h]').textContent = pad(h);
+      el.querySelector('[data-cd-m]').textContent = pad(m);
+      el.querySelector('[data-cd-s]').textContent = pad(sec);
+    });
+    cdShort.forEach(function (el) { el.textContent = 'Son ' + (d > 0 ? d + ' gün ' + h + ' saat' : pad(h) + ':' + pad(m) + ':' + pad(sec)) + ' · '; });
+    return true;
+  }
+  if (tick()) setInterval(tick, 1000);
 })();

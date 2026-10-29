@@ -350,3 +350,83 @@ ul.v li::before{content:"";position:absolute;left:2px;top:.45em;width:14px;heigh
   .inst-reels{grid-template-columns:repeat(2,minmax(0,1fr));width:100%;max-width:440px;gap:12px}
   .inst .reel{width:100%}
 }
+
+/* v1.5 (2026-10-29): trust bar, why section, price sides, countdown, gift, FAQ help card, rich footer */
+.trustbar{background:var(--bg2);border-top:1px solid #ffffff0d;border-bottom:1px solid #ffffff0d}
+.trustbar-in{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding-top:26px;padding-bottom:26px}
+.trustbar-in li{display:flex;align-items:center;gap:14px}
+.trustbar-in svg{width:40px;height:40px;flex:none;padding:9px;border-radius:12px;background:#D4F75A14;fill:none;stroke:var(--lime);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.trustbar-in b{display:block;font-size:15px}
+.trustbar-in span{display:block;font-size:13.5px;color:var(--mute2)}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain{background:var(--card);border:1px solid #2E2E34;border-radius:var(--r);padding:26px}
+.pain-q{font-family:var(--head);font-weight:600;font-size:18px;letter-spacing:-.01em;line-height:1.3;margin-bottom:12px}
+.pain-a{color:var(--mute);font-size:15.5px;padding-left:16px;border-left:3px solid var(--lime)}
+.who{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;margin-top:34px;font-size:15px}
+.who b{margin-right:6px}
+.who span{border:1px solid var(--line);border-radius:999px;padding:7px 14px;color:var(--mute)}
+.price-grid{display:grid;grid-template-columns:280px minmax(0,1fr) 280px;gap:28px;align-items:center;max-width:1340px}
+.price-grid .price-card{max-width:none;margin:0}
+.price-side{background:var(--card);border:1px solid #2E2E34;border-radius:var(--r);padding:28px 24px}
+.price-side h3{font-family:var(--head);font-weight:600;font-size:21px;letter-spacing:-.01em;margin-bottom:18px}
+.steps-v{list-style:none;padding:0;margin:0;display:grid;gap:16px;counter-reset:st}
+.steps-v li{position:relative;padding-left:42px;counter-increment:st}
+.steps-v li::before{content:counter(st);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--lime);color:var(--bg);font-weight:800;font-size:14px;display:grid;place-items:center}
+.steps-v b{display:block;font-size:15.5px}
+.steps-v span{display:block;font-size:14px;color:var(--mute2)}
+.side-link{display:inline-block;margin-top:20px;font-weight:700;color:var(--lime);text-decoration:none}
+.guard{display:grid;gap:14px;font-size:14px;color:var(--mute2)}
+.guard b{color:var(--ink)} .guard a{color:var(--ink)}
+.cd{margin:4px auto 20px;max-width:440px}
+.cd-label{font-size:14.5px;color:var(--mute);margin-bottom:10px}
+.cd-label b{color:var(--ink)}
+.cd-boxes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.cd-boxes span{background:#222227;border:1px solid #3E3E47;border-radius:14px;padding:10px 4px;font-size:12px;color:var(--mute2);text-transform:uppercase;letter-spacing:.08em}
+.cd-boxes b{display:block;font:700 28px/1.1 var(--head);color:var(--lime);letter-spacing:0;font-variant-numeric:tabular-nums}
+.cd-after{font-size:13px;color:var(--mute2);margin-top:8px}
+.cd-inline{font-weight:800}
+.gift{display:flex;gap:14px;align-items:flex-start;text-align:left;margin:22px 0 4px;padding:16px 18px;border:1px dashed #D4F75A80;border-radius:16px;background:#D4F75A0d}
+.gift .new-tag{flex:none;margin-top:2px}
+.gift b{display:block}
+.gift p span{display:block;font-size:14px;color:var(--mute)}
+.faq-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px;align-items:start}
+.help-card{position:sticky;top:96px;background:var(--card);border:1px solid #3E3E47;border-radius:var(--r);padding:28px;display:grid;gap:12px}
+.help-card h3{font-family:var(--head);font-weight:600;font-size:22px;letter-spacing:-.01em}
+.help-card p:not(.eyebrow){color:var(--mute);font-size:15px;margin-bottom:6px}
+.help-card .eyebrow{margin-bottom:0}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)} .btn-ghost:hover{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--lime)}
+.help-links{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px;font-size:14px}
+.help-links a{color:var(--mute);text-decoration:none} .help-links a:hover{color:var(--lime)}
+.foot-in{grid-template-columns:1.5fr 1fr 1fr 1fr}
+.foot-links b{color:var(--ink);font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.foot-brand p{max-width:340px}
+.foot-badges{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.foot-badges li{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--mute)}
+@media (max-width:1100px){
+  .price-grid{grid-template-columns:1fr 1fr}
+  .price-grid .price-card{grid-column:1/-1;grid-row:1;max-width:700px;margin:0 auto}
+  .faq-grid{grid-template-columns:minmax(0,1fr) 300px;gap:32px}
+  .foot-in{grid-template-columns:1fr 1fr}
+}
+@media (max-width:900px){
+  .trustbar-in{grid-template-columns:1fr 1fr}
+  .pain-grid{grid-template-columns:1fr 1fr}
+  .faq-grid{grid-template-columns:1fr}
+  .help-card{position:static}
+}
+@media (max-width:760px){
+  .trustbar-in{gap:14px;padding-top:20px;padding-bottom:20px}
+  .trustbar-in li{gap:10px}
+  .trustbar-in svg{width:34px;height:34px;padding:7px}
+  .trustbar-in b{font-size:13.5px} .trustbar-in span{font-size:12px}
+  .pain-grid{grid-template-columns:1fr;gap:12px}
+  .pain{padding:20px}
+  .who{justify-content:flex-start}
+  .price-grid{grid-template-columns:1fr;gap:16px}
+  .cd-boxes b{font-size:24px}
+  .foot-in{grid-template-columns:1fr 1fr;gap:28px}
+  .foot-brand{grid-column:1/-1}
+}
+.req-hint{font-size:14px;color:var(--mute2);margin-top:6px}
+.req-hint a{color:var(--lime);text-decoration:none;font-weight:700;white-space:nowrap}
+@media (max-width:1000px){.req-hint{text-align:center}}
