@@ -60,20 +60,31 @@
   });
   videos.forEach(function (v) { v.addEventListener('play', function () { if (!v.muted) pauseOthers(v); }); });
 
-  // Editor cost calculator.
-  var S = { n: 8, f: 750 };
+  // Cost calculator: business tab (editor fee vs ReelsKlon) and editor tab (hours won back).
+  var S = { n: 8, f: 750, en: 20, eh: 2, ef: 750 };
+  var LIM = { n: [1, 60], f: [250, 10000], en: [2, 200], eh: [0.5, 12], ef: [250, 10000] };
   function fmt(x) { return x.toLocaleString('tr-TR'); }
+  function set(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; }
   function draw() {
-    document.getElementById('c-n').textContent = S.n;
-    document.getElementById('c-f').textContent = fmt(S.f) + ' TL';
-    document.getElementById('c-m').textContent = fmt(S.n * S.f) + ' TL';
-    document.getElementById('c-y').textContent = fmt(S.n * S.f * 12) + ' TL';
+    set('c-n', S.n); set('c-f', fmt(S.f) + ' TL'); set('c-m', fmt(S.n * S.f) + ' TL'); set('c-y', fmt(S.n * S.f * 12) + ' TL');
+    set('e-n', S.en); set('e-h', fmt(S.eh) + ' saat'); set('e-f', fmt(S.ef) + ' TL');
+    // ~30 min of the editor's own review and touch-up per draft is assumed (stated next to the result).
+    var won = Math.max(0, S.en * (S.eh - 0.5));
+    set('e-s', fmt(Math.round(won)) + ' saat'); set('e-y', fmt(Math.round(won * 12)) + ' saat');
+    set('e-a', Math.ceil(800 / S.ef) + ' Reels');
   }
   document.querySelectorAll('[data-calc]').forEach(function (b) {
     b.addEventListener('click', function () {
       var k = b.getAttribute('data-calc'), d = +b.getAttribute('data-d');
-      S[k] = k === 'n' ? Math.max(1, Math.min(60, S[k] + d)) : Math.max(250, Math.min(10000, S[k] + d));
+      S[k] = Math.max(LIM[k][0], Math.min(LIM[k][1], S[k] + d));
       draw();
+    });
+  });
+  document.querySelectorAll('[data-tab]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var k = b.getAttribute('data-tab');
+      document.querySelectorAll('[data-tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+      document.querySelectorAll('[data-pane]').forEach(function (p) { p.hidden = p.getAttribute('data-pane') !== k; });
     });
   });
   if (document.getElementById('c-n')) draw();
@@ -90,28 +101,19 @@
     targets.forEach(function (t) { io2.observe(t); });
   }
 
-  // Launch price countdown: real deadline 2026-11-05 23:59 (Europe/Istanbul, UTC+3).
+  // Launch price: real deadline 2026-11-05 23:59 (Europe/Istanbul, UTC+3). Days only, no ticking seconds.
   var END = Date.parse('2026-11-05T23:59:59+03:00');
-  var cdBoxes = document.querySelectorAll('[data-cd]'), cdShort = document.querySelectorAll('[data-cd-short]');
-  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  var cdBoxes = document.querySelectorAll('[data-cd]');
   function tick() {
     var ms = END - Date.now();
-    if (ms <= 0) {
-      cdBoxes.forEach(function (el) { el.hidden = true; });
-      cdShort.forEach(function (el) { el.hidden = true; });
-      return false;
-    }
-    var t = Math.floor(ms / 1000), d = Math.floor(t / 86400), h = Math.floor(t % 86400 / 3600), m = Math.floor(t % 3600 / 60), sec = t % 60;
+    if (ms <= 0) { cdBoxes.forEach(function (el) { el.hidden = true; }); return; }
+    var d = Math.floor(ms / 86400000);
     cdBoxes.forEach(function (el) {
-      el.querySelector('[data-cd-d]').textContent = d;
-      el.querySelector('[data-cd-h]').textContent = pad(h);
-      el.querySelector('[data-cd-m]').textContent = pad(m);
-      el.querySelector('[data-cd-s]').textContent = pad(sec);
+      var left = el.querySelector('.cd-left');
+      if (left) left.innerHTML = d > 0 ? '<b>' + d + '</b> gün kaldı' : '<b>Son gün</b>';
     });
-    cdShort.forEach(function (el) { el.textContent = 'Son ' + (d > 0 ? d + ' gün ' + h + ' saat' : pad(h) + ':' + pad(m) + ':' + pad(sec)) + ' · '; });
-    return true;
   }
-  if (tick()) setInterval(tick, 1000);
+  tick();
 
   // Reviews: show 6, expand to all.
   var revMore = document.querySelector('[data-rev-more]');
