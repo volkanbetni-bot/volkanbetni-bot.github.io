@@ -71,7 +71,7 @@
     // ~30 min of the editor's own review and touch-up per draft is assumed (stated next to the result).
     var won = Math.max(0, S.en * (S.eh - 0.5));
     set('e-s', fmt(Math.round(won)) + ' saat'); set('e-y', fmt(Math.round(won * 12)) + ' saat');
-    set('e-a', Math.ceil(800 / S.ef) + ' Reels');
+    set('e-a', Math.ceil(1000 / S.ef) + ' Reels');
   }
   document.querySelectorAll('[data-calc]').forEach(function (b) {
     b.addEventListener('click', function () {
