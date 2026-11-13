@@ -71,7 +71,7 @@
     // ~30 min of the editor's own review and touch-up per draft is assumed (stated next to the result).
     var won = Math.max(0, S.en * (S.eh - 0.5));
     set('e-s', fmt(Math.round(won)) + ' saat'); set('e-y', fmt(Math.round(won * 12)) + ' saat');
-    set('e-a', Math.ceil(1000 / S.ef) + ' Reels');
+    set('e-a', Math.ceil(800 / S.ef) + ' Reels');
   }
   document.querySelectorAll('[data-calc]').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -101,8 +101,8 @@
     targets.forEach(function (t) { io2.observe(t); });
   }
 
-  // Launch price: real deadline 2026-11-05 23:59 (Europe/Istanbul, UTC+3). Days only, no ticking seconds.
-  var END = Date.parse('2026-11-05T23:59:59+03:00');
+  // Kasım fırsatı: real deadline 2026-11-30 23:59 (Europe/Istanbul, UTC+3). Days only, no ticking seconds.
+  var END = Date.parse('2026-11-30T23:59:59+03:00');
   var cdBoxes = document.querySelectorAll('[data-cd]');
   function tick() {
     var ms = END - Date.now();
